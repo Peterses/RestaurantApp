@@ -15,7 +15,7 @@ class TabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setViewControllers([homeCoordinator.navigationController, secondCoordinator.navigationController], animated: false)
-        tabBar.tintColor = .systemGreen
+        tabBar.tintColor = .systemBlue
     }
 
 }

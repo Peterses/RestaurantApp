@@ -31,10 +31,12 @@ class MainView: UIView {
     private lazy var chooseImageButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .systemBlue
         button.setTitle("Choose image", for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(.systemGray, for: .normal)
         button.layer.cornerRadius = 10
+        button.layer.borderWidth = 0.2
         return button
     }()
     
@@ -42,9 +44,11 @@ class MainView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Take photo", for: .normal)
+        button.tintColor = .systemBlue
         button.backgroundColor = .white
         button.setTitleColor(.systemGray, for: .normal)
         button.layer.cornerRadius = 10
+        button.layer.borderWidth = 0.2
         return button
     }()
     
@@ -57,14 +61,27 @@ class MainView: UIView {
         return stackView
     }()
     
-    private lazy var analyzeButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Analyze image", for: .normal)
-        button.backgroundColor = .white
-        button.setTitleColor(.systemGray, for: .normal)
-        button.layer.cornerRadius = 10
-        return button
+    //    private lazy var analyzeButton: UIButton = {
+    //        let button = UIButton()
+    //        button.translatesAutoresizingMaskIntoConstraints = false
+    //        button.setTitle("Analyze image", for: .normal)
+    //        button.backgroundColor = .white
+    //        button.setTitleColor(.systemGray, for: .normal)
+    //        button.layer.cornerRadius = 10
+    //        button.layer.borderWidth = 0.2
+    //        return button
+    //    }()
+    
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        let readMe = "Wybierz zdjęcie z biblioteki, które chcesz przeanalizować lub zrób nowe zdjęcie (kliknij odpowiedni przycisk powyżej).".uppercased()
+        label.text = readMe
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.textColor = .init(red: 124.0/255.0, green: 124.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        label.font = .systemFont(ofSize: 13, weight: .light)
+        return label
     }()
     
     private func setImageView() {
@@ -74,7 +91,6 @@ class MainView: UIView {
             imageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
         ])
-        imageView.image = UIImage(named: "uploadImage")
     }
     
     private func setButtonStackView() {
@@ -83,8 +99,37 @@ class MainView: UIView {
         NSLayoutConstraint.activate([
             buttonStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15),
             buttonStackView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            buttonStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -20)
+            buttonStackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+            buttonStackView.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -15)
         ])
+    }
+    
+    private lazy var bottomView: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .yellow
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private func setBottomView() {
+        NSLayoutConstraint.activate([
+//            bottomView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 15),
+            bottomView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            bottomView.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
+            bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -15),
+//            bottomView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
+    private func setTextView() {
+
+        NSLayoutConstraint.activate([
+            infoLabel.topAnchor.constraint(equalTo: bottomView.topAnchor),
+            infoLabel.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
+            infoLabel.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
+        ])
+        
+        infoLabel.sizeToFit()
     }
     
     func setImage(image: UIImage) {
@@ -96,14 +141,14 @@ class MainView: UIView {
     }
     
     private func setAnalyzeButton() {
-        analyzeButton.addTarget(self, action: #selector(analyzeImageButton), for: .touchUpInside)
+        //        analyzeButton.addTarget(self, action: #selector(analyzeImageButton), for: .touchUpInside)
     }
     
     private func setButton() {
-        NSLayoutConstraint.activate([
-            analyzeButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            analyzeButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 100)
-        ])
+        //        NSLayoutConstraint.activate([
+        //            analyzeButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+        //            analyzeButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 100)
+        //        ])
     }
     
     @objc private func selectPhotoButton() {
@@ -116,19 +161,24 @@ class MainView: UIView {
     
     private func addSubviews() {
         addSubview(imageView)
-        addSubview(analyzeButton)
+        //        addSubview(analyzeButton)
+        addSubview(bottomView)
+        bottomView.addSubview(infoLabel)
         addSubview(buttonStackView)
+//        addSubview(infoLabel)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemGreen
+        backgroundColor = .white
         addSubviews()
         setImageView()
         setButton()
+        setBottomView()
         setButtonStackView()
         setChooseButton()
         setAnalyzeButton()
+        setTextView()
     }
     
     required init?(coder: NSCoder) {

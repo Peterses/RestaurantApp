@@ -18,6 +18,9 @@ class ENumbersListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        DbManager.shared.fetchAllAdditives { additives in
+            print(additives?.randomElement()?.eNumber)
+        }
     }
     
 }
