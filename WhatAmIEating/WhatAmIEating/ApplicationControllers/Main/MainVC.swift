@@ -60,10 +60,6 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        DbManager.shared.fetchAllAdditives { additives in
-            print("ALL: \(additives?.first?.eNumber)")
-        }
     }
     
 }

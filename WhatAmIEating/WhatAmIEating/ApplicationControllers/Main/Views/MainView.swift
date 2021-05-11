@@ -32,7 +32,7 @@ class MainView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .systemBlue
-        button.setTitle("Choose image", for: .normal)
+        button.setTitle("Wybierz zdjęcie", for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(.systemGray, for: .normal)
         button.layer.cornerRadius = 10
@@ -43,7 +43,7 @@ class MainView: UIView {
     private lazy var takePhotoButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Take photo", for: .normal)
+        button.setTitle("Zrób zdjęcie", for: .normal)
         button.tintColor = .systemBlue
         button.backgroundColor = .white
         button.setTitleColor(.systemGray, for: .normal)
@@ -64,7 +64,7 @@ class MainView: UIView {
     private lazy var analyzeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Analyze image", for: .normal)
+        button.setTitle("Analizuj zdjęcie", for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(.systemGray, for: .normal)
         button.layer.cornerRadius = 10
