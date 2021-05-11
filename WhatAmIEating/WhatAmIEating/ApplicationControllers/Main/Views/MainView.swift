@@ -104,7 +104,7 @@ class MainView: UIView {
         ])
     }
     
-    private lazy var bottomView: UIView = {
+    lazy var bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -140,6 +140,7 @@ class MainView: UIView {
     
     private func setAnalyzeButton() {
         analyzeButton.addTarget(self, action: #selector(analyzeImageButton), for: .touchUpInside)
+        analyzeButton.widthAnchor.constraint(equalTo: chooseImageButton.widthAnchor).isActive = true
     }
     
     private func setButton() {

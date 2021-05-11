@@ -22,6 +22,7 @@
 		65E179812624994D00598B51 /* ENumbersListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E179802624994D00598B51 /* ENumbersListCoordinator.swift */; };
 		65E2BC7A2649D899004F54D3 /* AfterAnalyzeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E2BC792649D899004F54D3 /* AfterAnalyzeVC.swift */; };
 		65E2BC7C2649EBB8004F54D3 /* AdditivesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E2BC7B2649EBB8004F54D3 /* AdditivesTableViewCell.swift */; };
+		65E2BC7F264A0C60004F54D3 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 65E2BC7E264A0C60004F54D3 /* JGProgressHUD */; };
 		65E905B126037F410063FF41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E905B026037F410063FF41 /* AppDelegate.swift */; };
 		65E905B326037F410063FF41 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E905B226037F410063FF41 /* SceneDelegate.swift */; };
 		65E905B526037F410063FF41 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E905B426037F410063FF41 /* MainVC.swift */; };
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65A6F0E426407B6700332F31 /* RealmSwift in Frameworks */,
+				65E2BC7F264A0C60004F54D3 /* JGProgressHUD in Frameworks */,
 				65A6F0E226407B6700332F31 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +211,7 @@
 			packageProductDependencies = (
 				65A6F0E126407B6700332F31 /* Realm */,
 				65A6F0E326407B6700332F31 /* RealmSwift */,
+				65E2BC7E264A0C60004F54D3 /* JGProgressHUD */,
 			);
 			productName = WhatAmIEating;
 			productReference = 65E905AD26037F410063FF41 /* WhatAmIEating.app */;
@@ -239,6 +242,7 @@
 			mainGroup = 65E905A426037F410063FF41;
 			packageReferences = (
 				65A6F0E026407B6700332F31 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				65E2BC7D264A0C60004F54D3 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 65E905AE26037F410063FF41 /* Products */;
 			projectDirPath = "";
@@ -486,6 +490,14 @@
 				minimumVersion = 10.7.4;
 			};
 		};
+		65E2BC7D264A0C60004F54D3 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -498,6 +510,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 65A6F0E026407B6700332F31 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		65E2BC7E264A0C60004F54D3 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65E2BC7D264A0C60004F54D3 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

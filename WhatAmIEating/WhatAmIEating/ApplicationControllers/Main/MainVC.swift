@@ -1,11 +1,6 @@
-//
-//  ViewController.swift
-//  WhatAmIEating
-//
-//  Created by Peterses on 18/03/2021.
-//
 
 import UIKit
+import JGProgressHUD
 
 class MainVC: UIViewController {
     
@@ -26,12 +21,13 @@ class MainVC: UIViewController {
     }
     
     private func analyzeImage() {
-        
         let image = mainView.imageView.image
         let analyzedText = ImageAnalyzer().recognizeText(image: image)
         
         let symbols = ImageAnalyzer().findESymbolsRegex(text: analyzedText)
         var additives: [Additive] = []
+        
+ //       print(symbols.description)
         
         // mock
         //let symbols = ["E101", "E150d"]
@@ -46,8 +42,6 @@ class MainVC: UIViewController {
             }
         }
 
-        print("after")
-        print(additives.description)
         let vc = AfterAnalyzeVC(additives: additives)
         vc.title = "Składniki E"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -66,6 +60,10 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DbManager.shared.fetchAllAdditives { additives in
+            print("ALL: \(additives?.first?.eNumber)")
+        }
     }
     
 }
