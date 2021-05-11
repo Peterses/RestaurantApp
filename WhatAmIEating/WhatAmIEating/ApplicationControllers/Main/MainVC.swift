@@ -1,11 +1,6 @@
-//
-//  ViewController.swift
-//  WhatAmIEating
-//
-//  Created by Peterses on 18/03/2021.
-//
 
 import UIKit
+import JGProgressHUD
 
 class MainVC: UIViewController {
     
@@ -25,14 +20,33 @@ class MainVC: UIViewController {
         present(vc, animated: true)
     }
     
-    
     private func analyzeImage() {
-        
         let image = mainView.imageView.image
         let analyzedText = ImageAnalyzer().recognizeText(image: image)
         
-        print(analyzedText)
-        print(ImageAnalyzer().findESymbolsRegex(text: analyzedText))
+        let symbols = ImageAnalyzer().findESymbolsRegex(text: analyzedText)
+        var additives: [Additive] = []
+        
+ //       print(symbols.description)
+        
+        // mock
+        //let symbols = ["E101", "E150d"]
+        
+        for symbol in symbols {
+            DbManager.shared.fetchSingleAdditive(id: symbol) { additive in
+                print(additive?.eNumber)
+                guard let additive = additive else {
+                    return
+                }
+                additives.append(additive)
+            }
+        }
+
+        let vc = AfterAnalyzeVC(additives: additives)
+        vc.title = "Składniki E"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     init() {

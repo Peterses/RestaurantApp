@@ -18,8 +18,20 @@ class ENumbersListCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = ENumbersListVC()
-        vc.tabBarItem = UITabBarItem(title: "E-symbols", image: UIImage(systemName: "text.book.closed"), selectedImage: UIImage(systemName: "text.book.closed.fill"))
+        
+        var additives: [Additive] = []
+        //print("XDDD")
+        DbManager.shared.fetchAllAdditives { results in
+            for i in 0...results!.count - 1 {
+                additives.append(results![i])
+                //print(results![i])
+            }
+        }
+        
+        let vc = ENumbersListVC(additives: additives)
+        vc.tabBarItem = UITabBarItem(title: "Symbole E", image: UIImage(systemName: "text.book.closed"), selectedImage: UIImage(systemName: "text.book.closed.fill"))
+        vc.title = "Baza symboli"
+        navigationController.navigationBar.prefersLargeTitles = true
         navigationController.pushViewController(vc, animated: false)
     }
     

@@ -1,17 +1,16 @@
 //
-//  ENumbersListViewController.swift
+//  AfterAnalyzeVC.swift
 //  WhatAmIEating
 //
-//  Created by Peterses on 12/04/2021.
+//  Created by Peterses on 10/05/2021.
 //
 
+import Foundation
 import UIKit
 
-class ENumbersListVC: UIViewController {
-
-    private var eNumbersView = ENumbersListView()
+class AfterAnalyzeVC: UIViewController {
     
-    private var additives: [Additive] = []
+    private var additives: [Additive]
     private var tableView: UITableView = UITableView()
     
     init(additives: [Additive]) {
@@ -23,21 +22,12 @@ class ENumbersListVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        view = eNumbersView
-    }
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
         view.addSubview(tableView)
         view.backgroundColor = .white
         tableView.register(AdditivesTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,17 +36,16 @@ class ENumbersListVC: UIViewController {
     
 }
 
-extension ENumbersListVC: UITableViewDelegate, UITableViewDataSource {
+extension AfterAnalyzeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return additives.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AdditivesTableViewCell
-
+//        cell.configure(number: "E150d", name: "Karmel amoniakalno-siarczynowy", status: "Zaakceptowany w EU. Zaakceptowany w US.", descriptionLabel: "Karmel amoniakalno-siarczynowy jest barwnikiem spożywczym. Wszystkie karmele dzieli się na cztery klasy w odniesieniu do reagentów użytych w czasie produkcji, a amoniakalno-siarczynowy zaliczany jest do klasy IV. Barwnik ten jako dodatek do żywności oznaczany jest symbolem E150d. Karmel amoniakalny wytwarza się poprzez ogrzewanie węglowodanów (cukrów prostych: glukozy i fruktozy lub ich polimerów) w obecności siarczynów i związków amoniaku.")
+//        
         cell.configure(number: additives[indexPath.row].eNumber, name: additives[indexPath.row].name, status: additives[indexPath.row].status, descriptionLabel: additives[indexPath.row].eDescription)
         return cell
     }
-    
-    
 }

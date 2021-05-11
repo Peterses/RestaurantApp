@@ -21,7 +21,7 @@ class DbManager {
         }
     }
     
-    func fetchAllAdditives(completion: @escaping (Results<Additive>?) -> Void){
+    func fetchAllAdditives(completion: @escaping (Results<Additive>?) -> Void) {
         guard let db = realm else {
             return completion(nil)
         }
@@ -29,5 +29,19 @@ class DbManager {
         let additivesRM = db.objects(Additive.self)
         
         return completion(additivesRM)
+    }
+    
+    func fetchSingleAdditive(id: String, completion: @escaping (Additive?) -> Void) {
+        guard let db = realm else {
+            return completion(nil)
+        }
+        
+        let additive = db.objects(Additive.self)
+            .filter("eNumber == %@", id)
+            .first
+
+        print(additive?.eNumber)
+        
+        return completion(additive)
     }
 }
