@@ -2,7 +2,14 @@
 import UIKit
 import JGProgressHUD
 
-class MainVC: UIViewController {
+// MARK: - PhotoSource
+enum PhotoSource {
+    case camera
+    case photoLibrary
+}
+
+// MARK: - MainViewController
+class MainViewController: UIViewController {
     
     var coordinator: HomeCoordinator?
     private var mainView = MainView()
@@ -12,9 +19,14 @@ class MainVC: UIViewController {
         view = mainView
     }
     
-    private func setImagePickerController() {
+    private func setImagePickerController(source: PhotoSource) {
         let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
+        switch source {
+        case .camera:
+            vc.sourceType = .camera
+        case .photoLibrary:
+            vc.sourceType = .photoLibrary
+        }
         vc.delegate = self
         vc.allowsEditing = true
         present(vc, animated: true)
@@ -27,14 +39,8 @@ class MainVC: UIViewController {
         let symbols = ImageAnalyzer().findESymbolsRegex(text: analyzedText)
         var additives: [Additive] = []
         
- //       print(symbols.description)
-        
-        // mock
-        //let symbols = ["E101", "E150d"]
-        
         for symbol in symbols {
             DbManager.shared.fetchSingleAdditive(id: symbol) { additive in
-                print(additive?.eNumber)
                 guard let additive = additive else {
                     return
                 }
@@ -65,9 +71,14 @@ class MainVC: UIViewController {
 }
 
 // MARK: - MainViewDelegate
-extension MainVC: MainViewDelegate {
+extension MainViewController: MainViewDelegate {
+    
+    func didTakePhotoButtonClicked() {
+        setImagePickerController(source: .camera)
+    }
+    
     func didChooseButtonClicked() {
-        setImagePickerController()
+        setImagePickerController(source: .photoLibrary)
     }
     
     func didAnalyzeButtonClicked() {
@@ -76,10 +87,9 @@ extension MainVC: MainViewDelegate {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension MainVC: UIImagePickerControllerDelegate {
+extension MainViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
-            setImagePickerController()
             mainView.setImage(image: image)
         }
         
@@ -92,6 +102,6 @@ extension MainVC: UIImagePickerControllerDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
-extension MainVC: UINavigationControllerDelegate {
+extension MainViewController: UINavigationControllerDelegate {
     
 }

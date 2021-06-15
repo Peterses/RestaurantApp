@@ -15,7 +15,12 @@ class DbManager {
     
     private init() {
         do {
-            self.realm = try Realm()
+            let config = try Realm.Configuration(
+                fileURL: Bundle.main.url(forResource: "default", withExtension: "realm"),
+                readOnly: true
+            )
+            self.realm = try Realm.init(configuration: config)
+            
         } catch {
             print("Error initializing new Realm: \(error)")
         }

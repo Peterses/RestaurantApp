@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - ENumbersListCoordinator
 class ENumbersListCoordinator: Coordinator {
     
     var navigationController: UINavigationController
@@ -20,11 +21,9 @@ class ENumbersListCoordinator: Coordinator {
     func start() {
         
         var additives: [Additive] = []
-        //print("XDDD")
         DbManager.shared.fetchAllAdditives { results in
             for i in 0...results!.count - 1 {
                 additives.append(results![i])
-                //print(results![i])
             }
         }
         

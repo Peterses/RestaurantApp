@@ -10,6 +10,7 @@ import UIKit
 protocol MainViewDelegate: AnyObject {
     
     func didChooseButtonClicked()
+    func didTakePhotoButtonClicked()
     func didAnalyzeButtonClicked()
     
 }
@@ -139,8 +140,12 @@ class MainView: UIView {
     }
     
     private func setAnalyzeButton() {
-        analyzeButton.addTarget(self, action: #selector(analyzeImageButton), for: .touchUpInside)
+        analyzeButton.addTarget(self, action: #selector(analyzeImageButtonAction), for: .touchUpInside)
         analyzeButton.widthAnchor.constraint(equalTo: chooseImageButton.widthAnchor).isActive = true
+    }
+    
+    private func setTakePhotoButton() {
+        takePhotoButton.addTarget(self, action: #selector(takePhotoButtonAction), for: .touchUpInside)
     }
     
     private func setButton() {
@@ -154,7 +159,11 @@ class MainView: UIView {
         self.delegate?.didChooseButtonClicked()
     }
     
-    @objc private func analyzeImageButton() {
+    @objc private func takePhotoButtonAction() {
+        self.delegate?.didTakePhotoButtonClicked()
+    }
+    
+    @objc private func analyzeImageButtonAction() {
         self.delegate?.didAnalyzeButtonClicked()
     }
     
@@ -177,6 +186,7 @@ class MainView: UIView {
         setChooseButton()
         setAnalyzeButton()
         setTextView()
+        setTakePhotoButton()
     }
     
     required init?(coder: NSCoder) {

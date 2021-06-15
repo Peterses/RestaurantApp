@@ -43,8 +43,7 @@ extension AfterAnalyzeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AdditivesTableViewCell
-//        cell.configure(number: "E150d", name: "Karmel amoniakalno-siarczynowy", status: "Zaakceptowany w EU. Zaakceptowany w US.", descriptionLabel: "Karmel amoniakalno-siarczynowy jest barwnikiem spożywczym. Wszystkie karmele dzieli się na cztery klasy w odniesieniu do reagentów użytych w czasie produkcji, a amoniakalno-siarczynowy zaliczany jest do klasy IV. Barwnik ten jako dodatek do żywności oznaczany jest symbolem E150d. Karmel amoniakalny wytwarza się poprzez ogrzewanie węglowodanów (cukrów prostych: glukozy i fruktozy lub ich polimerów) w obecności siarczynów i związków amoniaku.")
-//        
+
         cell.configure(number: additives[indexPath.row].eNumber, name: additives[indexPath.row].name, status: additives[indexPath.row].status, descriptionLabel: additives[indexPath.row].eDescription)
         return cell
     }

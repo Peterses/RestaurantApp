@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Coordinator
 protocol Coordinator {
     
     var childCoordinators: [Coordinator] { get set }
